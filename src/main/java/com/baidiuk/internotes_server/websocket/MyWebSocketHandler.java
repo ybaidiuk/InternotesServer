@@ -30,17 +30,23 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         LOGGER.info("handleTextMessage");
-        System.out.println("SANTA handleTextMessage");
+
+        //parse json
+        String sJson = message.getPayload();
+        System.out.println(sJson);
+
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        sessions.put(session.getId(), session);
         LOGGER.info("user has CREATED connection");
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        LOGGER.warn("user has CLOSED connection");
+        sessions.remove(session.getId());
+        LOGGER.warn("user has CLOSED connection with reason :" + status.getReason());
     }
 
     @Override
