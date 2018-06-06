@@ -7,7 +7,7 @@ class WebSocketClient {
     this.protocol = 'ws';
     this.hostname = 'localhost';
     this.port     = '8080';
-    this.endpoint = '/baidiuk';
+    this.endpoint = '/';
   }
 
   getServerUrl() {
@@ -46,7 +46,7 @@ class WebSocketClient {
   }
   send(message) {
 
-    if (this.webSocket.readyState == WebSocket.OPEN) {
+    if (this.webSocket.readyState === WebSocket.OPEN) {
       this.webSocket.send(message);
 
     } else {
@@ -54,7 +54,7 @@ class WebSocketClient {
     }
   }
   disconnect() {
-    if (this.webSocket.readyState == WebSocket.OPEN) {
+    if (this.webSocket.readyState === WebSocket.OPEN) {
       this.webSocket.close();
 
     } else {
